@@ -18,6 +18,11 @@ describe('ScoreCard', function() {
       scoreCard.addRoll(2);
       expect(scoreCard.totalScore).toEqual(2);
     });
+    // a user can take a complete return
+      it('allows a user to complete a turn', function() {
+        scoreCard.addRoll(2);
+        scoreCard.addRoll(5);
+        expect(scoreCard.frames).toContain([2,5]);
+      });
+    });
   });
-
-});

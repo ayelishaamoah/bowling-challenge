@@ -12,11 +12,18 @@ describe('Features', function() {
     expect(scoreCard.getFrames()).toEqual([]);
   });
 
+  // a user can add a roll
   describe('addRoll', function() {
     it('allows a user to add a roll', function(){
        scoreCard.addRoll(2);
        expect(scoreCard.getTotalScore()).toEqual(2);
     });
-  });
 
+  // a user can take a complete return
+    it('allows a user to complete a turn', function() {
+      scoreCard.addRoll(2);
+      scoreCard.addRoll(5);
+      expect(scoreCard.getFrames()).toContain([2,5]);
+    });
+  });
 });
