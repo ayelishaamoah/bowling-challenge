@@ -17,13 +17,14 @@ ScoreCard.prototype.getTotalScore = function () {
   var rollIndex = 0;
   for(var frameIndex = 0; frameIndex < 10; frameIndex++ ) {
     if(this.isSpare(rollIndex)) {
-      this.getSpareScore(rollIndex)
+      this.totalScore += this.getRoundScore(rollIndex) + this.getSpareBonus(rollIndex)
       rollIndex += 2;
     } else if (this.isStrike(rollIndex)) {
-      this.getStrikeScore(rollIndex)
+      var strike = 10
+      this.totalScore += strike + this.getStrikeBonus(rollIndex)
       rollIndex += 1;
     } else {
-      this.totalScore += this.rolls[rollIndex] + this.rolls[rollIndex + 1];
+      this.totalScore += this.getRoundScore(rollIndex);
       rollIndex += 2;
     };
   };
@@ -34,18 +35,18 @@ ScoreCard.prototype.isSpare = function(rollIndex) {
   return (this.rolls[rollIndex] + this.rolls[rollIndex + 1]) === 10;
 };
 
-ScoreCard.prototype.getSpareScore = function(rollIndex) {
-  var roundScore = this.rolls[rollIndex] + this.rolls[rollIndex + 1];
-  var spareBonus = this.rolls[rollIndex + 2];
-  return this.totalScore += roundScore + spareBonus;
+ScoreCard.prototype.getRoundScore = function (rollIndex) {
+  return this.rolls[rollIndex] + this.rolls[rollIndex + 1];
+};
+
+ScoreCard.prototype.getSpareBonus = function(rollIndex) {
+  return this.rolls[rollIndex + 2];
 }
 
 ScoreCard.prototype.isStrike = function(rollIndex) {
   return this.rolls[rollIndex] === 10;
 };
 
-ScoreCard.prototype.getStrikeScore = function(rollIndex) {
-  var roundScore = 10
-  var strikeBonus = this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2]
-  return this.totalScore += roundScore + strikeBonus;
+ScoreCard.prototype.getStrikeBonus = function(rollIndex) {
+  return this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2]
 }
