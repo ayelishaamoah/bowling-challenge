@@ -18,6 +18,9 @@ ScoreCard.prototype.getTotalScore = function () {
     if(this.isSpare(rollIndex)) {
       this.getSpareScore(rollIndex)
       rollIndex += 2;
+    } else if (this.isStrike(rollIndex)) {
+      this.getStrikeScore(rollIndex)
+      rollIndex += 1;
     }
     this.totalScore += this.rolls[rollIndex];
   };
@@ -31,5 +34,15 @@ ScoreCard.prototype.isSpare = function(rollIndex) {
 ScoreCard.prototype.getSpareScore = function(rollIndex) {
   var roundScore = this.rolls[rollIndex] + this.rolls[rollIndex + 1];
   var spareBonus = this.rolls[rollIndex + 2];
+  return this.totalScore += roundScore + spareBonus;
+}
+
+ScoreCard.prototype.isStrike = function(rollIndex) {
+  return this.rolls[rollIndex] === 10;
+};
+
+ScoreCard.prototype.getStrikeScore = function(rollIndex) {
+  var roundScore = 10
+  var spareBonus = this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2]
   return this.totalScore += roundScore + spareBonus;
 }
