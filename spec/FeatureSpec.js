@@ -3,6 +3,12 @@
 describe('Features', function() {
   var scoreCard;
 
+  function multipleRolls(rolls, score) {
+    for (var i = 0 ; i < rolls; i++) {
+      scoreCard.addRoll(score);
+    };
+  };
+
   beforeEach(function(){
     scoreCard = new ScoreCard();
   });
@@ -12,16 +18,12 @@ describe('Features', function() {
     it('allows a user to add rolls', function() {
       scoreCard.addRoll(2);
       scoreCard.addRoll(5);
-      for (var i = 0 ; i < 18; i++) {
-        scoreCard.addRoll(0);
-      }
+      multipleRolls(18, 0);
       expect(scoreCard.getTotalScore()).toEqual(7);
     });
 
     it('allows a user to roll a gutter game', function() {
-      for (var i = 0 ; i < 20; i++) {
-        scoreCard.addRoll(0);
-      }
+      multipleRolls(20, 0);
       expect(scoreCard.getTotalScore()).toEqual(0);
     });
 
@@ -29,9 +31,7 @@ describe('Features', function() {
       scoreCard.addRoll(4);
       scoreCard.addRoll(6);
       scoreCard.addRoll(3);
-      for (var i = 0 ; i < 17; i++) {
-        scoreCard.addRoll(0);
-      };
+      multipleRolls(17, 0);
       expect(scoreCard.getTotalScore()).toEqual(16);
     });
 
