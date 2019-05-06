@@ -43,6 +43,6 @@ ScoreCard.prototype.isStrike = function(rollIndex) {
 
 ScoreCard.prototype.getStrikeScore = function(rollIndex) {
   var roundScore = 10
-  var spareBonus = this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2]
-  return this.totalScore += roundScore + spareBonus;
+  var strikeBonus = this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2]
+  return this.totalScore += roundScore + strikeBonus;
 }
