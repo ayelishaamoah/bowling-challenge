@@ -14,15 +14,18 @@ ScoreCard.prototype.addRoll = function (pins) {
 };
 
 ScoreCard.prototype.getTotalScore = function () {
-  for(var rollIndex = 0; rollIndex < this.rolls.length; rollIndex++ ) {
+  var rollIndex = 0;
+  for(var frameIndex = 0; frameIndex < 10; frameIndex++ ) {
     if(this.isSpare(rollIndex)) {
       this.getSpareScore(rollIndex)
       rollIndex += 2;
     } else if (this.isStrike(rollIndex)) {
       this.getStrikeScore(rollIndex)
       rollIndex += 1;
-    }
-    this.totalScore += this.rolls[rollIndex];
+    } else {
+      this.totalScore += this.rolls[rollIndex] + this.rolls[rollIndex + 1];
+      rollIndex += 2;
+    };
   };
   return this.totalScore;
 };

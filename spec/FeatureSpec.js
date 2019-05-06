@@ -43,6 +43,11 @@ describe('Features', function() {
       expect(scoreCard.getTotalScore()).toEqual(24);
     });
 
+    it('allows a user to roll a strike', function() {
+      multipleRolls(12, 10);
+      expect(scoreCard.getTotalScore()).toEqual(300);
+    });
+
   });
 
 });
