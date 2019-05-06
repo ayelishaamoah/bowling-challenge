@@ -17,5 +17,24 @@ describe('Features', function() {
       }
       expect(scoreCard.getTotalScore()).toEqual(7);
     });
+
+    it('allows a user to roll a gutter game', function() {
+      for (var i = 0 ; i < 20; i++) {
+        scoreCard.addRoll(0);
+      }
+      expect(scoreCard.getTotalScore()).toEqual(0);
+    });
+
+    it('allows a user to roll a spare', function() {
+      scoreCard.addRoll(4);
+      scoreCard.addRoll(6);
+      scoreCard.addRoll(3);
+      for (var i = 0 ; i < 17; i++) {
+        scoreCard.addRoll(0);
+      };
+      expect(scoreCard.getTotalScore()).toEqual(16);
+    });
+
   });
+
 });

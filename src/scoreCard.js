@@ -14,8 +14,22 @@ ScoreCard.prototype.addRoll = function (pins) {
 };
 
 ScoreCard.prototype.getTotalScore = function () {
-  for(var roll = 0; roll < this.rolls.length; roll++ ) {
-    this.totalScore += this.rolls[roll];
+  for(var rollIndex = 0; rollIndex < this.rolls.length; rollIndex++ ) {
+    if(this.isSpare(rollIndex)) {
+      this.getSpareScore(rollIndex)
+      rollIndex += 2;
+    }
+    this.totalScore += this.rolls[rollIndex];
   };
   return this.totalScore;
 };
+
+ScoreCard.prototype.isSpare = function(rollIndex) {
+  return (this.rolls[rollIndex] + this.rolls[rollIndex + 1]) === 10;
+};
+
+ScoreCard.prototype.getSpareScore = function(rollIndex) {
+  var roundScore = this.rolls[rollIndex] + this.rolls[rollIndex + 1];
+  var spareBonus = this.rolls[rollIndex + 2];
+  return this.totalScore += roundScore + spareBonus;
+}
