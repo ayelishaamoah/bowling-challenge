@@ -3,6 +3,7 @@
 function ScoreCard() {
   this.rolls = [];
   this.totalScore = 0;
+  this.MAX_FRAMES = 10;
 };
 
 ScoreCard.prototype.getRolls = function() {
@@ -15,7 +16,7 @@ ScoreCard.prototype.addRoll = function (pins) {
 
 ScoreCard.prototype.getTotalScore = function () {
   var rollIndex = 0;
-  for(var frameIndex = 0; frameIndex < 10; frameIndex++ ) {
+  for(var frameIndex = 0; frameIndex < MAX_FRAMES; frameIndex++ ) {
     if(this.isSpare(rollIndex)) {
       this.totalScore += this.getRoundScore(rollIndex) + this.getSpareBonus(rollIndex)
       rollIndex += 2;
